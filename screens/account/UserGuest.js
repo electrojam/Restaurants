@@ -6,7 +6,7 @@ export default function UserGuest() {
     return (
         <View>
             <Text>UserGuest...</Text>
-            <Loading isVisible={true} text="Cargando..."/>        
+                  
         </View>
     )
 }

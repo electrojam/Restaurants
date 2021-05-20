@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import Loading from '../../components/Loading'
 
 import { isUserLogged } from '../../utils/actions'
 import UserGuest from './UserGuest'
@@ -12,9 +13,9 @@ export default function Account() {
         setLogin(isUserLogged())
     }, [])
     
-    if (login == null) {
-        return <Text>Cargando...</Text>
-    }
+    //if (login == null) {
+        return <Loading isVisible={true} text="Cargando..."/>
+  //  }
 
     return login ? <UserLogged/> : <UserGuest/>
 } 
