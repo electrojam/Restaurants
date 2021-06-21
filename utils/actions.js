@@ -11,3 +11,4 @@ export const isUserLogged = () => {
     })
     return isLogged
 }
+
