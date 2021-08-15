@@ -6,7 +6,7 @@ export default function Modal({ isVisible, setVisible, children }) {
     return (
         <Overlay
             isVisible={isVisible}
-            overLayStyle={styles.overLay}
+            overlayStyle={styles.overlay}
             onBackdropPress={() => setVisible(false)}
         >
             {
@@ -17,7 +17,7 @@ export default function Modal({ isVisible, setVisible, children }) {
 }
 
 const styles = StyleSheet.create({
-    overLay: {
+    overlay: {
         width: "90%"
     }
 })
