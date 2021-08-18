@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { Button, Icon, Input } from 'react-native-elements'
 import { isEmpty } from 'lodash'
 
-import { updateProfile } from '../../utils/actions'
+import { reauthenticate, updateEmail, updateProfile } from '../../utils/actions'
 import { validateEmail } from '../../utils/helpers'
 
 export default function ChangeEmailForm({ email, setShowModal, toastRef, setReloadUser }) {
@@ -19,18 +19,25 @@ export default function ChangeEmailForm({ email, setShowModal, toastRef, setRelo
             return
         }
 
-    //     setLoading(true)
-    //     const result = await updateProfile({ displayName: newDisplayName })
-    //     setLoading(false)
+        setLoading(true)
+        const resultreauthenticate = await reauthenticate(password)
+        if(!resultreauthenticate.statusResponse) {
+            setErrorPassword("Contraseña incorrecta.")
+            setLoading (false)
+            return
+        }
 
-    //     if(!result.statusResponse) {
-    //         setError("Error al actualizar nombres y apellidos, intenta más tarde.")
-    //         return
-    //     }
+        const resultupdateEmail = await updateEmail(newEmail)
+        setLoading (false)
 
-    //     setReloadUser(true)
-    //     toastRef.current.show("Se han actualizado nombres y apellidos.", 3000)
-    //     setShowModal(false)
+        if(!resultupdateEmail.statusResponse) {
+            setErrorEmail("No se puede puede cambiar por este correo, ya está en uso por otro usuario.")
+            return
+        }
+
+        setReloadUser(true)
+        toastRef.current.show("Se ha actualizado el email.", 3000)
+        setShowModal(false)
     }
 
     const validateForm = () => {
