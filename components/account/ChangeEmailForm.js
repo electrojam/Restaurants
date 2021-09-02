@@ -20,10 +20,10 @@ export default function ChangeEmailForm({ email, setShowModal, toastRef, setRelo
         }
 
         setLoading(true)
-        const resultreauthenticate = await reauthenticate(password)
-        if(!resultreauthenticate.statusResponse) {
-            setErrorPassword("Contraseña incorrecta.")
+        const resultReauthenticate = await reauthenticate(password)
+        if(!resultReauthenticate.statusResponse) {
             setLoading (false)
+            setErrorPassword("Contraseña incorrecta.")
             return
         }
 

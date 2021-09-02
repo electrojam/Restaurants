@@ -3,8 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { Button, Icon, Input } from 'react-native-elements'
 import { isEmpty, size } from 'lodash'
 
-import { reauthenticate, updateEmail, updateProfile } from '../../utils/actions'
-import { validateEmail } from '../../utils/helpers'
+import { reauthenticate, updatePassword} from '../../utils/actions'
 
 export default function ChangePasswordForm({ setShowModal, toastRef }) {
     const [newPassword, setNewPassword] = useState(null)
@@ -21,25 +20,24 @@ export default function ChangePasswordForm({ setShowModal, toastRef }) {
             return
         }
 
-        // setLoading(true)
-        // const resultreauthenticate = await reauthenticate(password)
-        // if(!resultreauthenticate.statusResponse) {
-        //     setErrorPassword("Contraseña incorrecta.")
-        //     setLoading (false)
-        //     return
-        // }
+        setLoading(true)
+        const resultReauthenticate = await reauthenticate(currentPassword)
+        if(!resultReauthenticate.statusResponse) {
+            setLoading (false)
+            setErrorCurrentPassword("Contraseña incorrecta.")
+            return
+        }
 
-        // const resultupdateEmail = await updateEmail(newEmail)
-        // setLoading (false)
+        const resultUpdatePassword = await updatePassword(newPassword)
+        setLoading (false)
 
-        // if(!resultupdateEmail.statusResponse) {
-        //     setErrorEmail("No se puede puede cambiar por este correo, ya está en uso por otro usuario.")
-        //     return
-        // }
+        if(!resultUpdatePassword.statusResponse) {
+            setErrorNewPassword("Hubo un problema cambiando la contraseña, por favor intente más tarde.")
+            return
+        }
 
-        // setReloadUser(true)
-        // toastRef.current.show("Se ha actualizado el email.", 3000)
-        // setShowModal(false)  
+        toastRef.current.show("Se ha actualizado la contraseña.", 3000)
+        setShowModal(false)  
     }
 
     const validateForm = () => {
