@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { useFocusEffect } from '@react-navigation/native'
+import { size } from 'lodash'
 import firebase from 'firebase/app'
 
 import Loading from '../../components/Loading'
-import { getRestaurants } from '../../utils/actions'
-import { size } from 'lodash'
 import ListRestaurants from '../../components/restaurants/ListRestaurants'
+import { getMoreRestaurants, getRestaurants } from '../../utils/actions'
 
 export default function Restaurants({ navigation }) {
     const [user, setUser] = useState(null)
@@ -35,6 +35,20 @@ export default function Restaurants({ navigation }) {
         }, [])
     )
 
+    const handleLoadMore = async() => {
+        if(!startRestaurant) {
+            return
+        }
+
+        setLoading(true)
+        const response = await getMoreRestaurants(limitRestaurants, startRestaurant)
+        if(response.statusResponse) {
+            setStartRestaurant(response.startRestaurant)
+            setRestaurants([...restaurants, ...response.restaurants])
+        }
+        setLoading(false)
+    }
+
     if (user === null) {
         return <Loading isVisible={true} text="Cargando..."/>
     }
@@ -46,6 +60,7 @@ export default function Restaurants({ navigation }) {
                     <ListRestaurants
                         restaurants={restaurants}
                         navigation={navigation}
+                        handleLoadMore={handleLoadMore}
                     />
                 ) : (
                     <View style={styles.notFoundView}>
