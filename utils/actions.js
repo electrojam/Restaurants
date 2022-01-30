@@ -172,6 +172,6 @@ export const getDocumentById = async(collection, id) => {
         result.statusResponse = false
         result.error = error
     }
-    console.log(result)
+    // console.log(result)
     return result
 }
