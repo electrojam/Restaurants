@@ -29,11 +29,11 @@ function Restaurant({ restaurant, navigation }) {
     }, [])
     
     return (
-        <TouchableOpacity
-            onPress={() => navigation.navigate("restaurant", {
+        <TouchableOpacity onPress={() => navigation.navigate("restaurants", {
                 screen: "restaurant",
                 params: { id, name }
-            })}     
+            })} 
+  
         >
             <Card containerStyle={styles.containerCard}>
                 <Icon
@@ -49,7 +49,7 @@ function Restaurant({ restaurant, navigation }) {
                     PlaceholderContent={<ActivityIndicator size="large" color="#FFF"/>}
                     source={{ uri: images[0] }}
                 />
-                <View>
+                <View style={styles.titleRating}>
                     <Text style={styles.title}>{name}</Text>
                     <Rating
                         imageSize={20}
@@ -64,7 +64,7 @@ function Restaurant({ restaurant, navigation }) {
 }
 
 const styles = StyleSheet.create({
-    containerStyle: {
+    containerCard: {
         marginBottom: 30,
         borderWidth: 0
     },
@@ -86,5 +86,10 @@ const styles = StyleSheet.create({
         color: "grey",
         marginTop: 0,
         textAlign: "justify"
+    },
+    titleRating: {
+        flexDirection: "row",
+        marginVertical: 10,
+        justifyContent: "space-between"
     }
 })

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react'
 import { Alert, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { ListItem, Rating, Icon } from 'react-native-elements'
-import { map, stubFalse } from 'lodash'
+import { map } from 'lodash'
 import { useFocusEffect } from '@react-navigation/native'
 import firebase from 'firebase/app'
 import Toast from 'react-native-easy-toast'
@@ -23,38 +23,38 @@ export default function Restaurant({ navigation, route }) {
     const [ activeSlide, setActiveSlide ] = useState(0)
     const [ isFavorite, setIsFavorite ] = useState(false);
     const [ userLogged, setUserLogged ] = useState(false);
-    const [loading, setLoading] = useState(false);
-
+    const [ loading, setLoading ] = useState(false);
+    
     firebase.auth().onAuthStateChanged(user => {
         user ? setUserLogged(true) : setUserLogged(false)
     })
 
     navigation.setOptions({ title: name })
 
-    useEffect(() => {
-        (async() => {
-            if (userLogged && restaurant) {
-                const response = await getIsFavorite(restaurant.id)
-                response.statusResponse && setIsFavorite(response.isFavorite)
-            }
-        })()
-    },[userLogged, restaurant])
-
     useFocusEffect(
-        useCallback(() => {
-                (async() => {
-                    const response = await getDocumentById("restaurants", id)
+            useCallback(() => {
+                (async() => {                         
+                    const response = await getDocumentById("restaurants", id)  //Esta línea genera error rojo
                     if (response.statusResponse) {
-                        setRestaurant(response.document)
+                        setRestaurant(response.document)                      
                     } else {
                         setRestaurant({})
                         Alert.alert("Ocurrió un problema cargando el restaurante, intente más tarde.")
                     }
                 })()
-            }, [])
-    )
-
-    const addFavorite = async() => {
+            }, [id])
+        )
+        
+        useEffect(() => {
+            (async() => {
+                if (userLogged && restaurant) {
+                    const response = await getIsFavorite(restaurant.id)
+                    response.statusResponse && setIsFavorite(response.isFavorite)          
+                }
+            })()
+        },[userLogged, restaurant])
+        
+        const addFavorite = async() => {
         if (!userLogged) {
             toastRef.current.show("Para agregar el restaurante a favoritos debes estar logueado.", 3000)
             return
@@ -129,7 +129,7 @@ export default function Restaurant({ navigation, route }) {
                 idRestaurant={restaurant.id}
             />
             <Toast ref={toastRef} position="center" opacity={0.9}/>
-            <Loading isVisible={Loading} text="Por favorespere..."/>
+            <Loading isVisible={loading} text="Por favor espere..."/>
         </ScrollView>
     )
 }
