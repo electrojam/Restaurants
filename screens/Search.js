@@ -66,7 +66,7 @@ function Restaurant ({ restaurant, navigation }) {
         <ListItem 
             style={styles.menuItem}
             onPress={() => navigation.navigate("restaurants", {
-                screen: "retaurant",
+                screen: "restaurant",
                 params: {id, name}
             })}
         >

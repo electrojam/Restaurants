@@ -39,8 +39,10 @@
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
         "FOREGROUND_SERVICE",
-        "ACCESS_BACKGROUND_LOCATION"
-       ]       
+        "ACCESS_BACKGROUND_LOCATION",
+        "USER_FACING_NOTIFICATIONS"
+       ], 
+       "useNextNotificationsApi": true      
     },
     "web": {
       "favicon": "./assets/favicon.png"
