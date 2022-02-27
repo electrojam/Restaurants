@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "51068162361",
+    "project_id": "restaurants-547b3",
+    "storage_bucket": "restaurants-547b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51068162361:android:528e8fdd6121c0c6e618e8",
+        "android_client_info": {
+          "package_name": "com.electrojam.restaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51068162361-ilkp1k9fnlhim2ffpq033aib0c5qm9ps.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.electrojam.restaurants",
+            "certificate_hash": "566687d4168297c778c4fc3734e538a1c5a7288b"
+          }
+        },
+        {
+          "client_id": "51068162361-djg74qvtsfup5ejbojv949vda4n8rks8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNtUaqnMb3bh17czFSEMcRTLLEa8laNvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51068162361-djg74qvtsfup5ejbojv949vda4n8rks8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "51068162361-880qh6lt0kmmpg3tfijqj0dr48o4nj2u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.electrojam.restaurants"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
